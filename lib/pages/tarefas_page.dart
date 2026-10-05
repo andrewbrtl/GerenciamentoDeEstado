@@ -92,8 +92,11 @@ class TarefasPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final tarefa = provider.tarefas[index];
 
-                return CheckboxListTile(
-                  value: tarefa.concluida,
+                return ListTile(
+                  leading: Checkbox(
+                    value: tarefa.concluida,
+                    onChanged: (value) => provider.alterarStatus(tarefa),
+                  ),
                   title: Text(
                     tarefa.titulo,
                     style: TextStyle(
@@ -102,9 +105,19 @@ class TarefasPage extends StatelessWidget {
                           : null,
                     ),
                   ),
-                  subtitle: Text(tarefa.horario),
-                  secondary: const Icon(Icons.access_time),
-                  onChanged: (value) => provider.alterarStatus(tarefa),
+                  subtitle: Row(
+                    children: [
+                      const Icon(Icons.access_time, size: 16),
+                      const SizedBox(width: 6),
+                      Text(tarefa.horario),
+                    ],
+                  ),
+                  trailing: IconButton(
+                    tooltip: 'Excluir tarefa',
+                    icon: const Icon(Icons.delete_outline),
+                    onPressed: () => provider.excluirTarefa(tarefa),
+                  ),
+                  onTap: () => provider.alterarStatus(tarefa),
                 );
               },
             ),

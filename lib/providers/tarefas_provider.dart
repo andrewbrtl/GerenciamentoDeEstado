@@ -24,4 +24,9 @@ class TarefasProvider extends ChangeNotifier {
     tarefa.concluida = !tarefa.concluida;
     notifyListeners();
   }
+
+  void excluirTarefa(Tarefa tarefa) {
+    _tarefas.remove(tarefa);
+    notifyListeners();
+  }
 }

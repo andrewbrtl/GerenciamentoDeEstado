@@ -27,10 +27,20 @@ class ConcluidasPage extends StatelessWidget {
                   leading: const Icon(Icons.check_circle, color: Colors.teal),
                   title: Text(tarefa.titulo),
                   subtitle: Text(tarefa.horario),
-                  trailing: IconButton(
-                    tooltip: 'Marcar como pendente',
-                    icon: const Icon(Icons.undo),
-                    onPressed: () => provider.alterarStatus(tarefa),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        tooltip: 'Marcar como pendente',
+                        icon: const Icon(Icons.undo),
+                        onPressed: () => provider.alterarStatus(tarefa),
+                      ),
+                      IconButton(
+                        tooltip: 'Excluir tarefa',
+                        icon: const Icon(Icons.delete_outline),
+                        onPressed: () => provider.excluirTarefa(tarefa),
+                      ),
+                    ],
                   ),
                 );
               },
